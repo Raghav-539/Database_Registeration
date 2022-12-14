@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> User Profile </title>
+
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+
+    
+    <!-- including navbar  -->
+    <div class="nav">
+        <%- include('navbar.ejs', {uuid: uuid}) -%>   
+    </div>
+
+    <!-- displaying record in form of table -->
+
+    <div class="table-container">
+    
+        <table  cellpadding="15" cellspacing="15">
+
+            <caption> Profile Pannel </caption>
+
+            <tr>
+                <th> Uname </th>
+                <th> Password </th>
+                <th> Fname </th>
+                <th> Gender </th>
+                <th> Contact </th>
+
+            </tr>
+
+            <!-- ejs for showing data  from the databse  -->
+            <% 
+                for (var i=0;i<result.length;i++)
+                { %>
+                        <tr> 
+                            <td> <%=result[i].uname %>   </td>
+                            <td> <%=result[i].password %>   </td>
+                            <td> <%=result[i].fname  %>   </td>
+                            <td> <%=result[i].gender  %>   </td>
+                            <td> <%=result[i].contact  %>   </td>
+
+                        </tr>
+                    <%
+                }
+            %> 
+        </table>
+    </div>
+</body>
+</html>

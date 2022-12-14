@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sql form</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+<body>
+
+    <div class="container">
+
+        <header> Database Login </header>
+
+            <form action="/save" method="post" id="form-id">
+
+                <div class="form-group">
+                    <label for="uname"> User Name </label>
+                    <input type="text" id="uname" name="uname" placeholder="Enter User Name" class="form-control" autocomplete="off" required> <br><br>
+                </div>
+
+                <div class="form-group">
+                    <label for="password"> Password </label>
+                    <input type="password" id="password" name="password" placeholder="Enter Password" class="form-control" autocomplete="off" required> <br><br>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fname"> Father Name </label>
+                    <input type="text" id="fname" name="fname" placeholder="Enter Father Name" class="form-control" autocomplete="off" required> <br><br>
+                </div>
+                
+                <div class="form-group">
+                    <label for="gender"> Gender </label>
+                    <select id="gender" name="gender" required>
+                        <option disabled selected>Select gender</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Others</option>
+                    </select> <br><br>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact"> Phone number </label>
+                    <input type="number" id="contact" name="contact" placeholder="Enter Contact Number"  class="form-control" autocomplete="off" maxlength="10" required> <br><br>
+                </div>
+
+                <button type="submit" class="btn">Submit</button> 
+
+            </form>
+    </div> 
+
+    <script> 
+
+        document.getElementById("form-id").addEventListener("submit",(e)=>{
+            e.preventDefault();
+            axios.post("http://localhost:7000/save", {
+                uname: document.getElementById("uname").value,
+                password: document.getElementById("password").value,
+                fname: document.getElementById("fname").value,
+                gender: document.getElementById("gender").value,
+                contact: document.getElementById("contact").value
+            })
+                .then((result)=>{
+                    alert("Data saved successfully");
+                    document.getElementById("form-id").reset();
+                    location.href = "http://localhost:7000/login";
+                })
+                .catch((err)=>{
+                    alert('User Name already exists!');
+                });
+        });
+
+    </script>
+
+</body>
+</html>
